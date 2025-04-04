@@ -18,6 +18,8 @@ public class InformationTracker : MonoBehaviour
     [SerializeField] private TextMeshProUGUI currentObjectsText;
     [SerializeField] private TextMeshProUGUI spawnedObjectsText;
 
+    public bool keepTrackOfFPS = true;
+
     private void Start()
     {
         highestFramerate = 0f;
@@ -34,19 +36,25 @@ public class InformationTracker : MonoBehaviour
     {
         while (true)
         {
-            framerate = Mathf.Round(1f / Time.deltaTime);
-            if (framerate > highestFramerate)
+            //Always have it running, but only make it update the info if the boolean is true
+            if (keepTrackOfFPS)
             {
-                highestFramerate = framerate;
+                framerate = Mathf.Round(1f / Time.deltaTime);
+                if (framerate > highestFramerate)
+                {
+                    highestFramerate = framerate;
+                }
+                if (framerate < lowestFramerate)
+                {
+                    lowestFramerate = framerate;
+                }
+                framerateText.text = "FPS: " + framerate.ToString();
+                highestFramerateText.text = "Highest FPS: " + highestFramerate.ToString();
+                lowestFramerateText.text = "Lowest FPS: " + lowestFramerate.ToString();
             }
-            if (framerate < lowestFramerate)
-            {
-                lowestFramerate = framerate;
-            }
-            framerateText.text = "FPS: " + framerate.ToString();
-            highestFramerateText.text = "Highest FPS: " + highestFramerate.ToString();
-            lowestFramerateText.text = "Lowest FPS: " + lowestFramerate.ToString();
+            //Don't forget to prevent an infinite while loop ))
             yield return new WaitForSeconds(fpsUpdateRate);
+
         }        
     }
 
@@ -54,15 +62,6 @@ public class InformationTracker : MonoBehaviour
     {
         currentObjectsText.text = "Current Objects: " + currentObjects.Count;
         spawnedObjectsText.text = "Spawned Objects: " + spawnedObjects.ToString();
-    }
-
-    public void DestroyAllObjects()
-    {
-        for (int i = 0; i < currentObjects.Count; i++)
-        {
-            Destroy(currentObjects[i]);
-        }
-        currentObjects.Clear();
     }
 
     public void ResetStats()
