@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 7848919054410354517}
   - component: {fileID: 71402383746154468}
   - component: {fileID: 8942972283539259161}
-  - component: {fileID: 1651135072485138815}
+  - component: {fileID: 3395590721843347126}
   m_Layer: 0
-  m_Name: SubdividedCube
+  m_Name: MeshCubeBouncy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42,7 +42,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4676531427119451383}
-  m_Mesh: {fileID: 6007366748123537021, guid: c6bbe17193551b94797776e00295cde1, type: 3}
+  m_Mesh: {fileID: -5169353625594007637, guid: 128ed258477374f438592688cf895ece, type: 3}
 --- !u!23 &71402383746154468
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -876546973899608171, guid: c6bbe17193551b94797776e00295cde1, type: 3}
+  - {fileID: 2100000, guid: 2a0bf706b95068b41b6981d6f619e6c2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -92,7 +92,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4676531427119451383}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 563f178a40490594aa977c7330e0c989, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -106,8 +106,8 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 1
   m_CookingOptions: 30
-  m_Mesh: {fileID: 6007366748123537021, guid: c6bbe17193551b94797776e00295cde1, type: 3}
---- !u!54 &1651135072485138815
+  m_Mesh: {fileID: -5169353625594007637, guid: 128ed258477374f438592688cf895ece, type: 3}
+--- !u!54 &3395590721843347126
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -133,4 +133,4 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1

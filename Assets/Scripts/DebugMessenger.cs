@@ -2,9 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DebugMessager : MonoBehaviour
+public class DebugMessenger : MonoBehaviour
 {
-    public static DebugMessager Instance;
+    //Singleton designed to send debug messages with added functionality of being turned on/off
+    //Easier to use than commenting all debug messages in other scripts when they are not needed
+    //Also important to mention this class is only used for normal messages, not error messages
+
+    public static DebugMessenger Instance;
     [SerializeField] private bool showDebugMessages;
 
     private void Awake()

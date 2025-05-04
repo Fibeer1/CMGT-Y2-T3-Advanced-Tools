@@ -1,7 +1,4 @@
-﻿// Version 2023
-//  (delta time / shift)
-
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CameraControls : MonoBehaviour
 {
@@ -33,8 +30,9 @@ public class CameraControls : MonoBehaviour
 		float dy = Input.GetAxis("Vertical");
 		float dz = (Input.GetKey(KeyCode.Q) ? -1 : 0) + (Input.GetKey(KeyCode.E)? 1:0);
 		float multiplier = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift) ? 3 : 1;
-		transform.position += 
-			multiplier * Time.deltaTime * 
-			(transform.forward * moveSpeed * dy + transform.right * moveSpeed * dx + transform.up*moveSpeed * dz);
+		transform.position += multiplier * Time.deltaTime * 
+			(transform.forward * moveSpeed * dy + 
+			transform.right * moveSpeed * dx + 
+			transform.up * moveSpeed * dz);
     }
 }

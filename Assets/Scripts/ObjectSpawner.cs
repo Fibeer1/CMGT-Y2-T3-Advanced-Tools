@@ -49,13 +49,7 @@ public class ObjectSpawner : MonoBehaviour
 
     private void SpawnObjects()
     {
-        for (int i = 0; i < objectCountPerSpawn; i++)
-        {
-            Vector3 spawnPosition = GetRandomPointInCube();
-            GameObject objectInstance = Instantiate(prefabs[prefabIndexToSpawn], spawnPosition, Quaternion.identity, transform);
-            tracker.currentObjects.Add(objectInstance);
-            tracker.spawnedObjects++;
-        }
+        SpawnObjectGroup(prefabs[prefabIndexToSpawn], objectCountPerSpawn);
         if (randomizeIndexAfterEachSpawn)
         {
             prefabIndexToSpawn = random.Next(0, prefabs.Length);
@@ -74,6 +68,11 @@ public class ObjectSpawner : MonoBehaviour
         shouldSpawn = false;
         spawnCounter = 0;
         DestroyAllObjects();
+        SpawnObjectGroup(prefab, objectsToSpawn);
+    }
+
+    private void SpawnObjectGroup(GameObject prefab, int objectsToSpawn)
+    {
         for (int i = 0; i < objectsToSpawn; i++)
         {
             Vector3 spawnPosition = GetRandomPointInCube();
@@ -112,6 +111,7 @@ public class ObjectSpawner : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        //Draw the cube from which the objects spawn
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireCube(transform.position, spawnCubeSize);
     }
@@ -124,7 +124,7 @@ public class ObjectSpawner : MonoBehaviour
         }
         random = new System.Random(seed);
         spawnCounter = 0; //Reset spawn counter when changing seed
-        DebugMessager.DebugMessage("Seed initialized: " + seed);
+        DebugMessenger.DebugMessage("Seed initialized: " + seed);
     }
 
     private void OnValidate()

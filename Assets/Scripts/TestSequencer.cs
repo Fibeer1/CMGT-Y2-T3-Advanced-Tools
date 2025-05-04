@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-public class TestParameters : MonoBehaviour
+public class TestSequencer : MonoBehaviour
 {
     [Header("UI Variables")]
     [SerializeField] private TMP_Dropdown prefabDropdown;
@@ -16,13 +16,15 @@ public class TestParameters : MonoBehaviour
     [SerializeField] private GameObject[] prefabsToSpawn;
     private GameObject currentPrefabChosen;
     [SerializeField] private int objectCount = 0;
-    [SerializeField] private float testAvgFrameRate = 0;
     [SerializeField] private float testDuration = 0;
     private float testTimer = 0;
 
     [Header("Other Variables")]
     [SerializeField] private ObjectSpawner spawner;
     [SerializeField] private InformationTracker tracker;
+    [SerializeField] private FPSLogger fpsLogger;
+
+    [SerializeField] private int fpsCap = 60;
 
     private bool isTestRunning = false;
 
@@ -38,6 +40,7 @@ public class TestParameters : MonoBehaviour
         prefabDropdown.onValueChanged.AddListener(UpdateCurrentPrefab);
         durationInput.onValueChanged.AddListener(UpdateTestDuration);
         StopTest();
+        Application.targetFrameRate = fpsCap; //Cap the framerate to keep test conditions consistent
     }
 
     private void Update()
@@ -104,12 +107,12 @@ public class TestParameters : MonoBehaviour
     {
         if (!canRunTest)
         {
-            Debug.Log("One or more parameters is invalid, cannot start test.");
+            DebugMessenger.DebugMessage("One or more parameters is invalid, cannot start test.");
             return;
         }
         if (isTestRunning)
         {
-            Debug.Log("Test is in progress, stopping previous test instance.");
+            DebugMessenger.DebugMessage("Test is in progress, stopping previous test instance.");
             StopTest();
         }
         isTestRunning = true;
@@ -118,6 +121,7 @@ public class TestParameters : MonoBehaviour
         tracker.ResetStats();
         tracker.keepTrackOfFPS = true;
         testDurationText.gameObject.SetActive(true);
+        fpsLogger.StartLog(testDuration);
     }
 
     public void StopTest()
