@@ -3630,7 +3630,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationDirection: {x: 0, y: 1, z: 0}
-  rotationSpeed: 1
+  rotationSpeed: 0.5
 --- !u!1 &1274558760
 GameObject:
   m_ObjectHideFlags: 0
@@ -4459,6 +4459,7 @@ MonoBehaviour:
   spawner: {fileID: 1274558761}
   tracker: {fileID: 1489034468}
   fpsLogger: {fileID: 190207566}
+  rotBox: {fileID: 1225487730}
   fpsCap: 60
   canRunTest: 1
 --- !u!1 &1519098551

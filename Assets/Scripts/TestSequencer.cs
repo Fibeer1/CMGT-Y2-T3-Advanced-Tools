@@ -23,6 +23,7 @@ public class TestSequencer : MonoBehaviour
     [SerializeField] private ObjectSpawner spawner;
     [SerializeField] private InformationTracker tracker;
     [SerializeField] private FPSLogger fpsLogger;
+    [SerializeField] private RotatingCube rotBox;
 
     [SerializeField] private int fpsCap = 60;
 
@@ -121,7 +122,9 @@ public class TestSequencer : MonoBehaviour
         tracker.ResetStats();
         tracker.keepTrackOfFPS = true;
         testDurationText.gameObject.SetActive(true);
-        fpsLogger.StartLog(testDuration);
+        string environmentName = rotBox.rotationSpeed > 0 ? "RotatingBox" : "StaticBox";
+        string filename = objectCount.ToString() + currentPrefabChosen.name + environmentName + testDuration + "Seconds";
+        fpsLogger.StartLog(testDuration, filename);
     }
 
     public void StopTest()

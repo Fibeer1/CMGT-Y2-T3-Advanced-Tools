@@ -13,11 +13,11 @@ public class FPSLogger : MonoBehaviour
     private List<float> fpsList = new List<float>();
     private Coroutine currentLogSequence;
 
-    public void StartLog(float duration)
+    public void StartLog(float duration, string filename)
     {
         fpsList.Clear();
         StopLog();
-        currentLogSequence = StartCoroutine(FPSLogSequence(duration));
+        currentLogSequence = StartCoroutine(FPSLogSequence(duration, filename));
     }
 
     public void StopLog()
@@ -28,7 +28,7 @@ public class FPSLogger : MonoBehaviour
         }
     }
 
-    private IEnumerator FPSLogSequence(float duration)
+    private IEnumerator FPSLogSequence(float duration, string filename)
     {
         while (duration > 0)
         {
@@ -38,13 +38,13 @@ public class FPSLogger : MonoBehaviour
             yield return null;
         }
 
-        SaveToCSV();
+        SaveToCSV(filename);
         currentLogSequence = null;
     }
 
-    private void SaveToCSV()
+    private void SaveToCSV(string filename)
     {
-        string path = Application.dataPath + "/Test Results" + "/FPS_Log_" + System.DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".csv";
+        string path = Application.dataPath + "/Test Results" + "/" + filename + ".csv";
         string fileContent = "[Frame] - [FPS]\n";
         for (int i = 0; i < fpsList.Count; i++)
         {

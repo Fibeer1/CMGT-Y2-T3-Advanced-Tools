@@ -7,7 +7,7 @@ public class RotatingCube : MonoBehaviour
 {
     //Used to keep the spawned objects from staying in one place and not colliding
     [SerializeField] private Vector3 rotationDirection;
-    [SerializeField] private float rotationSpeed;
+    public float rotationSpeed;
 
     private void Update()
     {
