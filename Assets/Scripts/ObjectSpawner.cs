@@ -7,6 +7,7 @@ public class ObjectSpawner : MonoBehaviour
 {
     [SerializeField] private Vector3 spawnCubeSize;
     [SerializeField] private GameObject[] prefabs;
+    [SerializeField] private Transform spawnedObjectsParent;
 
     [SerializeField] private int prefabIndexToSpawn;
     [SerializeField] private bool randomizeIndexAfterEachSpawn = true;
@@ -76,7 +77,7 @@ public class ObjectSpawner : MonoBehaviour
         for (int i = 0; i < objectsToSpawn; i++)
         {
             Vector3 spawnPosition = GetRandomPointInCube();
-            GameObject objectInstance = Instantiate(prefab, spawnPosition, Quaternion.identity, transform);
+            GameObject objectInstance = Instantiate(prefab, spawnPosition, Quaternion.identity, spawnedObjectsParent);
             tracker.currentObjects.Add(objectInstance);
             tracker.spawnedObjects++;
         }
